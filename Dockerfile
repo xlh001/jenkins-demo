@@ -19,7 +19,7 @@ RUN go mod download
 RUN go mod tidy -v
 RUN go build -o demo_linux -ldflags "-w -s -X 'main.VERSION=$TAG' -X 'main.BUILD_TIME=`date`' -X 'main.GO_VERSION=`go version`'"
 # 清理不需要的文件
-RUN rm Dockerfile .travis.yml .gitattributes .gitignore go.mod go.sum main.go README.md conf/*.go
+RUN rm Dockerfile .gitignore go.mod go.sum main.go README.md
 RUN rm -rf cache commands controllers converter .git .github graphics mail models routers utils tests
 
 FROM alpine:latest
