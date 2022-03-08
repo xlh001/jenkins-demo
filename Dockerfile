@@ -22,9 +22,9 @@ RUN go build -o demo_linux -ldflags "-w -s -X 'main.VERSION=$TAG' -X 'main.BUILD
 RUN rm Dockerfile .gitignore go.mod go.sum main.go README.md
 RUN rm -rf cache commands controllers converter .git .github graphics mail models routers utils tests
 
-FROM alpine:latest
+FROM alpine:latest as prod
 COPY --from=builder /go/src/github.com/xlh001/jenkins-demo /jenkins-demo
 WORKDIR /jenkins-demo
 EXPOSE 8080
 
-ENTRYPOINT ['/bin/bash'.'./demo_linux']
+CMD [ "./demo_linux" ]
